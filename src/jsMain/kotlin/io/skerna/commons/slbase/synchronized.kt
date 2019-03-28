@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package io.skerna.lbase
+package io.skerna.commons.slbase
 
 actual inline fun <R> synchronized(lock: Any, block: () -> R): R {
     return block()

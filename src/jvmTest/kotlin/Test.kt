@@ -33,7 +33,7 @@ import org.junit.Test
 
 class Test{
     private val NUM_THREADS = 10
-    private val NUM_ITERATIONS = 5000
+    private val NUM_ITERATIONS = 3200
 
     @Test
     fun test(){
@@ -44,16 +44,15 @@ class Test{
         for (i in 0 until NUM_THREADS) {
             executor.submit {
                 for (i in 0 until NUM_ITERATIONS) {
-                    sync.incSync()
                     notSync.inc()
+                    sync.incSync()
                 }
             }
         }
-
-        println("Result Value sync: " + sync.value)
-        println("Result Value no sync: " + notSync.value)
         executor.shutdown()
         executor.awaitTermination(5, TimeUnit.SECONDS)
+        println("Result Value sync: " + sync.value)
+        println("Result Value no sync: " + notSync.value)
         assertThat(sync.value, `is`(NUM_THREADS * NUM_ITERATIONS))
         assertThat(notSync.value, `is`(not(NUM_THREADS * NUM_ITERATIONS)))
     }
@@ -64,7 +63,7 @@ class Test{
             private set
 
         fun incSync() {
-            synchronized(this){
+            io.skerna.commons.slbase.synchronized(this) {
                 value++
             }
         }

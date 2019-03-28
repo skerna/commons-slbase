@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package io.skerna.lbase
+package io.skerna.commons.slbase
 
 
 /**
@@ -190,7 +190,7 @@ open  class FactoryA2<T, in A,B>(creator: (A,B) -> T): AbstractFactory<T>() {
             if (i2 != null) {
                 i2
             } else {
-                val created = create(argA,argB)
+                val created = create(argA, argB)
                 instance = created
                 creator = null
                 created
@@ -233,7 +233,7 @@ open  class FactoryA3<T, in A,B,C>(creator: (A,B,C) -> T): AbstractFactory<T>() 
             if (i2 != null) {
                 i2
             } else {
-                val created = create(argA,argB,argC)
+                val created = create(argA, argB, argC)
                 instance = created
                 creator = null
                 created
