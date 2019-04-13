@@ -4,6 +4,9 @@ plugins {
 
 apply plugin: 'maven-publish'
 
+repositories {
+    mavenCentral()
+}
 kotlin {
     targets {
         fromPreset(presets.jvm, 'jvm')
