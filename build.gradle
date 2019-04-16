@@ -1,12 +1,13 @@
 plugins {
     id 'kotlin-multiplatform'
+    id "com.jfrog.bintray" version "1.8.4"
 }
 
 apply plugin: 'maven-publish'
 
 repositories {
     mavenCentral()
-    maven { url "https://jitpack.io" }
+    maven { url  "https://dl.bintray.com/skerna/maven" }
 }
 kotlin {
     targets {
@@ -71,3 +72,5 @@ compileTestKotlinJs {
     kotlinOptions.moduleKind = 'umd'
     kotlinOptions.sourceMapEmbedSources = 'always'
 }
+
+apply from: "./gradle/publish.gradle"
