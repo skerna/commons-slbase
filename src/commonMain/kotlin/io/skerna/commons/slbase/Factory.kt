@@ -106,7 +106,7 @@ open  class FactorySimple<T>(creator: () -> T): AbstractFactory<T>() {
             } else {
                 val created = create()
                 instance = created
-                creator = null
+                //creator = null
                 created
             }
         }
@@ -149,7 +149,7 @@ open  class Factory<T, in A>(creator: (A) -> T): AbstractFactory<T>() {
             } else {
                 val created = create(arg)
                 instance = created
-                creator = null
+                //creator = null
                 created
             }
         }
@@ -192,7 +192,6 @@ open  class FactoryA2<T, in A,B>(creator: (A,B) -> T): AbstractFactory<T>() {
             } else {
                 val created = create(argA, argB)
                 instance = created
-                creator = null
                 created
             }
         }
@@ -235,7 +234,6 @@ open  class FactoryA3<T, in A,B,C>(creator: (A,B,C) -> T): AbstractFactory<T>() 
             } else {
                 val created = create(argA, argB, argC)
                 instance = created
-                creator = null
                 created
             }
         }
