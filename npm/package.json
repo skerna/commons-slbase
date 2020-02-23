@@ -2,7 +2,7 @@
   "name": "$scope_npm_package/$project.name",
   "version" : "$version",
   "description" : "Loggin for javascript",
-  "main" : "r2b-slog.js",
+  "main" : "r2b-slbase.js",
   "author": "R2B",
   "license": "Apache-2.0",
   "homepage": "",

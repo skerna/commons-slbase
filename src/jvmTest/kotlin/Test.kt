@@ -41,9 +41,9 @@ class Test{
         val sync = Counter()
         val notSync = Counter()
 
-        for (i in 0 until NUM_THREADS) {
+        for (nThread in 0 until NUM_THREADS) {
             executor.submit {
-                for (i in 0 until NUM_ITERATIONS) {
+                for (nIteration in 0 until NUM_ITERATIONS) {
                     notSync.inc()
                     sync.incSync()
                 }

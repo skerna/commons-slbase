@@ -1,28 +1,26 @@
 plugins {
-    id 'kotlin-multiplatform'
-    id "com.jfrog.bintray" version "1.8.4"
+    id 'org.jetbrains.kotlin.multiplatform'
+    id "com.jfrog.bintray"
+    id 'com.moowork.node'
 }
-
 apply plugin: 'maven-publish'
+appy from: project.file("gradle/wrapper.gradle")
 
 repositories {
     mavenCentral()
+    jcenter()
     maven { url  "https://dl.bintray.com/skerna/maven" }
 }
 kotlin {
     targets {
         fromPreset(presets.jvm, 'jvm')
         fromPreset(presets.js, 'js')
-        // For ARM, preset should be changed to presets.iosArm32 or presets.iosArm64
-        // For Linux, preset should be changed to e.g. presets.linuxX64
-        // For MacOS, preset should be changed to e.g. presets.macosX64
-        //fromPreset(presets.linuxX64, 'linux')
     }
     sourceSets {
         commonMain {
             dependencies {
                 implementation "org.jetbrains.kotlin:kotlin-stdlib-common"
-                implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core-common:$kotlinCoroutinesVersion"
+                implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core-common:$kotlin_coroutines_version"
             }
         }
         commonTest {
@@ -30,12 +28,12 @@ kotlin {
                 implementation 'org.jetbrains.kotlin:kotlin-test-common'
                 implementation 'org.jetbrains.kotlin:kotlin-test-annotations-common'
             }
-            
+
         }
         jvmMain {
             dependencies {
                 implementation "org.jetbrains.kotlin:kotlin-stdlib"
-                implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlinCoroutinesVersion"
+                implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlin_coroutines_version"
             }
         }
         jvmTest {
@@ -49,7 +47,7 @@ kotlin {
         jsMain {
             dependencies {
                 implementation "org.jetbrains.kotlin:kotlin-stdlib-js"
-                implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core-js:$kotlinCoroutinesVersion"
+                implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core-js:$kotlin_coroutines_version"
             }
         }
         jsTest {
@@ -72,5 +70,6 @@ compileTestKotlinJs {
     kotlinOptions.moduleKind = 'umd'
     kotlinOptions.sourceMapEmbedSources = 'always'
 }
-
-apply from: "./gradle/publish.gradle"
+apply from: rootProject.file("gradle/node.gradle")
+apply from: rootProject.file("gradle/test-mocha-js.gradle")
+apply from: rootProject.file("gradle/publish.gradle")
